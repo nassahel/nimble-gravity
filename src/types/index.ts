@@ -1,15 +1,10 @@
-﻿export type Candidate = {
+export type Candidate = {
   uuid: string
   candidateId: string
   applicationId: string
   firstName: string
   lastName: string
   email: string
-}
-
-export type CandidateSummary = {
-  uuid: string
-  candidateId: string
 }
 
 export type Job = {
@@ -21,5 +16,4 @@ export type CandidateLookupProps = {
   baseUrl: string
   candidate: Candidate | null
   onCandidate: (candidate: Candidate | null) => void
-  onError: (message: string | null) => void
 }

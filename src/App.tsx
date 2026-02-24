@@ -1,6 +1,5 @@
-﻿import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import './App.css'
 import ApplyInfo from './components/steps/ApplyInfo'
 import CandidateLookup from './components/steps/CandidateLookup'
 import JobsList from './components/steps/JobsList'
@@ -116,10 +115,18 @@ function App() {
     setStep((prev) => (prev - 1) as Step)
   }
 
+  function restartFlow() {
+    setStep(1)
+    setCandidate(null)
+    setSelectedJob(null)
+    setRepoUrl('')
+    resetSubmitState()
+  }
+
   async function handleFinalSubmit() {
     resetSubmitState()
 
-    if (!candidate || !selectedJob || !repoUrl.trim()) {
+    if (!candidate || !selectedJob || !repoUrl.trim() || !candidate.applicationId) {
       setSubmitError('Faltan datos para enviar la postulación.')
       return
     }
@@ -134,6 +141,7 @@ function App() {
           uuid: candidate.uuid,
           jobId: selectedJob.id,
           candidateId: candidate.candidateId,
+          applicationId: candidate.applicationId,
           repoUrl: repoUrl.trim(),
         }),
       })
@@ -183,7 +191,6 @@ function App() {
                   baseUrl={BASE_URL}
                   candidate={candidate}
                   onCandidate={handleCandidate}
-                  onError={() => {}}
                 />
               </motion.div>
             ) : null}
@@ -248,10 +255,12 @@ function App() {
             step={step}
             totalSteps={4}
             submitLoading={submitLoading}
+            submitSuccess={submitSuccess}
             canContinue={canContinue(step)}
             onPrevious={goPrevious}
             onNext={goNext}
             onSubmit={handleFinalSubmit}
+            onRestart={restartFlow}
           />
         </section>
       </div>

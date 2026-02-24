@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { Candidate, CandidateLookupProps } from '../../types'
 import StepHeader from '../ui/StepHeader'
 
@@ -19,7 +19,7 @@ async function readErrorMessage(response: Response): Promise<string> {
   }
 }
 
-export default function CandidateLookup({ baseUrl, candidate, onCandidate, onError }: CandidateLookupProps) {
+export default function CandidateLookup({ baseUrl, candidate, onCandidate }: CandidateLookupProps) {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [localError, setLocalError] = useState<string | null>(null)
@@ -37,7 +37,6 @@ export default function CandidateLookup({ baseUrl, candidate, onCandidate, onErr
 
     setLoading(true)
     setLocalError(null)
-    onError(null)
     onCandidate(null)
 
     try {
@@ -52,7 +51,6 @@ export default function CandidateLookup({ baseUrl, candidate, onCandidate, onErr
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Error inesperado'
       setLocalError(message)
-      onError(message)
     } finally {
       setLoading(false)
     }

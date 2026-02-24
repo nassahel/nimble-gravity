@@ -1,4 +1,4 @@
-﻿import type { Candidate, Job } from '../../types'
+import type { Candidate, Job } from '../../types'
 
 type Props = {
   candidate: Candidate | null

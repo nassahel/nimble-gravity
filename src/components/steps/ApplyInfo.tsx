@@ -1,4 +1,4 @@
-﻿import StepHeader from '../ui/StepHeader'
+import StepHeader from '../ui/StepHeader'
 import SummaryPanel from '../ui/SummaryPanel'
 import type { Candidate, Job } from '../../types'
 

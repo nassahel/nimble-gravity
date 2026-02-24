@@ -1,4 +1,4 @@
-﻿import StepHeader from '../ui/StepHeader'
+import StepHeader from '../ui/StepHeader'
 
 type Props = {
   repoUrl: string
